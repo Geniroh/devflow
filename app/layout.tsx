@@ -1,20 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFonts from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const grotesk = localFonts({
+  src: "./fonts/SpaceGroteskVF.ttf",
+  variable: "--font-space-grotesk",
+  weight: "300 400 500 600 700",
 });
 
 export const metadata: Metadata = {
-  title: "Devflow",
-  description: "A platform for developers to learn and grow",
+  title: "Dev Overflow",
+  description:
+    "A community-driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate with developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more.",
+  icons: {
+    icon: "/images/site-logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -24,9 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${inter.className} ${grotesk.variable} antialiased`}>
         {children}
       </body>
     </html>
