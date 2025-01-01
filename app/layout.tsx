@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import localFonts from "next/font/local";
 import "./globals.css";
 import ThemeProvider from "@/context/Theme";
-import Navbar from "@/components/navigation/navbar";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -39,8 +39,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
