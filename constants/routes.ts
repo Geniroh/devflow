@@ -4,6 +4,7 @@ interface Routes {
   SIGN_UP: string;
   ASK_QUESTION: string;
   PROFILE: <T extends string | number>(id: T) => string;
+  QUESTION: <T extends string | number>(id: T) => string;
   TAGS: <T extends string | number>(id: T) => string;
 }
 
@@ -13,6 +14,7 @@ const ROUTES: Routes = {
   SIGN_UP: "/sign-up",
   ASK_QUESTION: "/ask-question",
   PROFILE: (id) => `/profile/${id}`,
+  QUESTION: (id) => `/question/${id}`,
   TAGS: (id) => `/tags/${id}`,
 };
 
