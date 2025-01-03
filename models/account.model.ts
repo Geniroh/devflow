@@ -2,11 +2,11 @@ import { models, Schema, model } from "mongoose";
 
 interface IAccount {
   userId: string;
-  username: string;
-  image: string;
+  name: string;
+  image?: string;
   password?: string;
   provider: string;
-  providerId: string;
+  providerAccountId: string;
 }
 
 const AccountSchema = new Schema(
@@ -16,7 +16,7 @@ const AccountSchema = new Schema(
       ref: "User",
       required: true,
     },
-    username: {
+    name: {
       type: String,
       required: true,
       trim: true,
@@ -24,7 +24,6 @@ const AccountSchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     password: {
       type: String,
@@ -33,7 +32,7 @@ const AccountSchema = new Schema(
       type: String,
       required: true,
     },
-    providerId: {
+    providerAccountId: {
       type: String,
       required: true,
     },
