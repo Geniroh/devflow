@@ -1,4 +1,4 @@
-import { models, Schema, model } from "mongoose";
+import { models, Schema, model, Document } from "mongoose";
 
 interface IAccount {
   userId: string;
@@ -8,6 +8,8 @@ interface IAccount {
   provider: string;
   providerAccountId: string;
 }
+
+export interface IAccountDoc extends IAccount, Document {}
 
 const AccountSchema = new Schema(
   {
@@ -42,6 +44,6 @@ const AccountSchema = new Schema(
   }
 );
 
-const Account = models?.account || model<IAccount>("Account", AccountSchema);
+const Account = models?.Account || model<IAccount>("Account", AccountSchema);
 
 export default Account;
