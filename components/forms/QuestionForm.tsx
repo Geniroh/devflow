@@ -20,6 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import TagCard from "@/components/cards/TagCard";
 
 const Editor = dynamic(() => import("@/components/editor"), {
   ssr: false,
@@ -37,18 +38,31 @@ const QuestionForm = () => {
     },
   });
 
-  const handleCreateQuestion = () => {};
+  const handleCreateQuestion = (data: z.infer<typeof AskQuestionSchema>) => {
+    console.log(data);
+  };
+
+  const handleTagRemove = (tag: string, field: { value: string[] }) => {
+    const newTags = field.value.filter((t) => t !== tag);
+
+    form.setValue("tags", newTags);
+
+    if (newTags.length === 0) {
+      form.setError("tags", {
+        type: "manual",
+        message: "Please add at least one tag",
+      });
+    }
+  };
 
   const handleInputKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     field: { value: string[] }
   ) => {
-    console.log(e, field);
     if (e.key === "Enter") {
       e.preventDefault();
 
-      const tagInput = e.currentTarget.value.trim();
-      console.log({ tagInput });
+      const tagInput = e.currentTarget.value.trim().toLocaleLowerCase();
       if (tagInput && tagInput.length < 15 && !field.value.includes(tagInput)) {
         form.setValue("tags", [...field.value, tagInput]);
         e.currentTarget.value = "";
@@ -138,7 +152,17 @@ const QuestionForm = () => {
                   />
                   {field.value.length > 0 && (
                     <div className="flex-start mt-2.5 flex-wrap gap-2.5">
-                      {field?.value?.map((tag, index) => `${tag}, `)}
+                      {field?.value?.map((tag, index) => (
+                        <TagCard
+                          key={tag}
+                          name={tag}
+                          compact
+                          _id={tag}
+                          remove
+                          isButton
+                          handleRemove={() => handleTagRemove(tag, field)}
+                        />
+                      ))}
                     </div>
                   )}
                 </div>
