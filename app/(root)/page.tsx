@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
 import HomeFilter from "@/components/filters/HomeFilter";
 import QuestionCard from "@/components/cards/QuestionCard";
+import logger from "@/lib/logger";
 
 const questions = [
   {
